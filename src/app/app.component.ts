@@ -1,22 +1,16 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
-  EventEmitter,
   Input,
   OnChanges,
   OnInit,
-  Output,
   SimpleChanges,
-  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import { HeaderConfig } from './shared/models/headerConfig';
-// import * as lodash from 'lodash';
-
 
 @Component({
-  selector: 'm1-link',
+  selector: 'm1-header',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom,
@@ -26,17 +20,18 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() header_config: HeaderConfig;
 
-   defaultAvatarConfig = {
-    size: 40,
-    initialsSize: 2,
-    src: 'https://cdn2.hubspot.net/hubfs/6171800/assets/images/logos/m-logo-symbol@2x.png',
-    cornerRadius: 5,
-    bgColor: 'black',
-    name: '3rd Degree Screening',
-    round: false
-  }
+  configOptions: any;
+  defaultConfig = {
+    header: {
+      path: 'http://192.168.1.2:8081/output/m1-header.js',
+      options: {
+        image_url: 'http://192.168.1.2:8081/src/assets/motus-logo-gray-blue.svg',
+        height: 30,
+        width: 100
+      }
+    }
+  };
 
-  currentHeight: any;
   constructor(
   ) {
   }
@@ -48,13 +43,12 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("control in ng changes",changes);
-    
+
     if (typeof changes?.['header_config']?.currentValue === 'string') {
       this.header_config = JSON.parse(changes?.['header_config']?.currentValue);
     }
-    this.header_config = Object.assign(this.header_config,this.defaultAvatarConfig)
-    console.log(this.header_config);
+    this.header_config = Object.assign(this.header_config, this.defaultConfig)
+    this.configOptions = this.header_config?.header?.options;
   }
 
 }

@@ -1,33 +1,36 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>headerlayout1</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
- 
+
 </head>
+
 <body>
 
-  <app-header id="app-header-1"></app-header>
+  <m1-header id="m1-header-1"></m1-header>
 
 
   <script>
     var config = {
-    size: 50,
-    initialsSize: 2,
-    src: 'https://cdn2.hubspot.net/hubfs/6171800/assets/images/logos/m-logo-symbol@2x.png',
-    cornerRadius: 5,
-    bgColor: 'black',
-    name: '3rd Degree Screening',
-    round: false
-  }
+      header: {
+        path: 'http://127.0.0.1:8081/output/m1-header.js',
+        options: {
+          image_url: 'http://127.0.0.1:8081/src/assets/motus-logo-gray-blue.svg',
+          height: 30,
+          width: 100
+        }
+      }
+    }
 
-    document.querySelector("#app-header-1").setAttribute("header_config", JSON.stringify(config));
+    document.querySelector("#m1-header-1").setAttribute("header_config", JSON.stringify(config));
 
-    let widget = document.querySelector("app-header-1");
-    
+    let widget = document.querySelector("m1-header-1");
+
     window.addEventListener("load", function () {
       setTimeout(function () {
         window.scrollTo(0, 1);
@@ -35,4 +38,5 @@
     });
   </script>
 </body>
+
 </html>

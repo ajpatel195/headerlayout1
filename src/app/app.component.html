@@ -1,32 +1,6 @@
-<div style="display: flex;" class="align-items-center justify-content-center">
-  <!-- <ngx-avatars [size]="60" class="mt-1 px-2" initialsSize=2
-    src="https://cdn2.hubspot.net/hubfs/6171800/assets/images/logos/m-logo-symbol@2x.png" cornerRadius="5"
-    bgColor="black" name="3rd Degree Screening" [round]="false">
-  </ngx-avatars>
-  
-  <ngx-avatars [size]="60" class="mt-1 px-2" initialsSize=2 [round]="false"
-    src="https://cdn2.hubspot.net/hubfs/6171800/assets/images/logos/m-logo-symbol@2x.png" cornerRadius="5"
-    bgColor="black" name="'M1'">
-  </ngx-avatars> -->
-
-  <ngx-avatars [size]="header_config.size!" class="mt-1 px-2" [initialsSize]="header_config.initialsSize!"
-  [src]="header_config.src" [cornerRadius]="header_config.cornerRadius!"
-  [bgColor]="header_config.bgColor" [name]="header_config.name" [round]="header_config.round!">
-  </ngx-avatars>
-  
-  <ngx-avatars [size]="header_config.size!" class="mt-1 px-2" [initialsSize]="header_config.initialsSize!"
-  [src]="header_config.src" [cornerRadius]="header_config.cornerRadius!"
-  [bgColor]="header_config.bgColor" [name]="header_config.name" [round]="header_config.round!">
-  </ngx-avatars>
+<div class="d-flex flex-column align-items-center justify-content-center">
+  <img src={{configOptions?.image_url}} width={{configOptions?.width}} height={{configOptions?.height}} />
+  <div class="d-flex flex-column">
+    <h4 class="m-2 header-text">Powered by MeasureOne</h4>
+  </div>
 </div>
-<!-- 
-<ngx-avatar [size]="60" class="mt-1 px-2" initialsSize=2 [src]="context?.data?.customer_logo" [round]="false"
-  cornerRadius="5" bgColor="black" [name]="context?.data?.customer_name">
-</ngx-avatar>
-<ngx-avatar [size]="60" class="mt-1 px-2" initialsSize=2 [src]="m1Logo | m1Logo" [round]="false" [name]="'M1'"
-  cornerRadius="5" bgColor="black">
-</ngx-avatar> -->
-
-
-
-

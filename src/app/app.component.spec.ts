@@ -1,13 +1,39 @@
-import { TestBed } from '@angular/core/testing';
+import { SimpleChange, SimpleChanges } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
+  let initConfig = {
+    header: {
+      path: 'http://192.168.1.2:8081/output/m1-header.js',
+      options: {
+        image_url: 'http://192.168.1.2:8081/src/assets/motus-logo-gray-blue.svg',
+        height: 30,
+        width: 100
+      }
+    }
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+
     }).compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('can load instance', () => {
+    expect(component).toBeTruthy();
   });
 
   it('should create the app', () => {
@@ -16,16 +42,31 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'headerlayout1'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('headerlayout1');
+  describe('ngOnChanges', () => {
+
+    it('should set current value in header_config', () => {
+      const simpleChangesStub: SimpleChange = new SimpleChange(null, JSON.stringify(initConfig), true);
+      const changesObj: SimpleChanges = {
+        header_config: simpleChangesStub
+      };
+      component.ngOnChanges(changesObj);
+      expect(component.header_config).toEqual(initConfig);
+    });
+
+    it('should set header_config and configOptions directly', () => {
+      component.header_config = initConfig;
+      const simpleChangesStub: SimpleChange = new SimpleChange(null, null, true);
+      const changesObj: SimpleChanges = {
+        header_config: simpleChangesStub
+      };
+      component.ngOnChanges(changesObj);
+      expect(component.header_config).toEqual(initConfig);
+      expect(component.configOptions).toEqual({
+        image_url: 'http://192.168.1.2:8081/src/assets/motus-logo-gray-blue.svg',
+        height: 30,
+        width: 100
+      });
+    });
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('headerlayout1 app is running!');
-  });
 });

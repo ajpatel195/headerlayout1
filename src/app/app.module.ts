@@ -5,7 +5,6 @@ import { BrowserModule,ɵDomSharedStylesHost } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { createCustomElement } from '@angular/elements';
-import { AvatarModule } from 'ngx-avatars';
 import { HttpClientModule } from '@angular/common/http';
 // import * from './../assets/m1-hea'
 @NgModule({
@@ -14,8 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
     ],
     imports: [
       BrowserModule,
-    HttpClientModule,
-    AvatarModule
+    HttpClientModule
     ],
     providers: [
         
@@ -40,8 +38,8 @@ export class AppModule {
     // const strategyFactory = new ElementZoneStrategyFactory(AppComponent, this.injector);
     const el = createCustomElement(AppComponent, { injector: this.injector});
 
-    if (!customElements.get('app-header')) {   // to resolve build issues in tl-portal
-      customElements.define('app-header', el);
+    if (!customElements.get('m1-header')) {   // to resolve build issues in tl-portal
+      customElements.define('m1-header', el);
      }
   }
 }
