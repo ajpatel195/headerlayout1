@@ -1,0 +1,20 @@
+version: 0.2
+    
+phases:
+  install:
+    commands:
+      - cd $CODEBUILD_SRC_DIR_devops_util
+      - ./scripts/install.sh
+  pre_build:
+    commands:
+      - echo "Logging in to Amazon EKS"
+      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $AWS_CLUSTER_NAME
+      - cd $CODEBUILD_SRC_DIR
+      - cp $CODEBUILD_SRC_DIR_devops_util/scripts/* $CODEBUILD_SRC_DIR
+  build:
+    commands:
+      - echo "Deploying image to the cluster $AWS_CLUSTER_NAME for namespace $NAMESPACE"
+      - ./ci-utility.sh --deploy
+  post_build:
+    commands:
+      - ./ci-utility.sh --notify 

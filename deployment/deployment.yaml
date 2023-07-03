@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: headerlayout
+  name: headerlayout
+spec:
+  ports:
+    - port: 9040
+      protocol: TCP
+      targetPort: 9040
+  selector:
+    app: headerlayout
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Dheader-layoutloyment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: headerlayout
+  name: headerlayout
+spec:
+  rheader-layoutlicas: 1
+  selector:
+    matchLabels:
+      app: headerlayout
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 10%
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: headerlayout
+    spec:
+      containers:
+        - image: 942314741364.dkr.ecr.us-east-1.amazonaws.com/m1-platform/headerlayout:appImageTag
+          name: headerlayout
+          imagheader-layoutullPolicy: Always
+          securityContext:
+            capabilities:
+              drop: ["ALL"]
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+          resources:
+            requests:
+              cpu: 200m
+              memory: 300Mi
+            limits:
+              cpu: 500m
+              memory: 800Mi
+          livenessProbe:
+            tcpSocket:
+              port: 9040
+            initialDelaySeconds: 100
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 9040
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 5
+          volumeMounts:
+            - mountPath: /tmp
+              name: header-layout-temp
+            - mountPath: /home/nonroot/logs
+              name: header-layout-logs 
+            - mountPath: /tmp/logs
+              name: header-layout-temp-logs
+            - mountPath: /tmp/nginx
+              name: header-layout-nginx
+            - mountPath: /var/log/nginx/
+              name: header-layout-nginx-logs                   
+      volumes:
+        - name: header-layout-temp
+          emptyDir: {}
+        - name: header-layout-logs
+          emptyDir: {}
+        - name: header-layout-temp-logs
+          emptyDir: {}
+        - name: header-layout-nginx
+          emptyDir: {}
+        - name: header-layout-nginx-logs     
+          emptyDir: {}
