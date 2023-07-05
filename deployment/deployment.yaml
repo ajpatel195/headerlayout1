@@ -39,7 +39,7 @@ spec:
         app: headerlayout
     spec:
       containers:
-        - image: 942314741364.dkr.ecr.us-east-1.amazonaws.com/m1-platform/headerlayout:appImageTag
+        - image: 942314741364.dkr.ecr.us-east-1.amazonaws.com/m1-platform/headerlayout1:appImageTag
           name: headerlayout
           imagheader-layoutullPolicy: Always
           securityContext:
