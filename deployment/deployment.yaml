@@ -3,31 +3,31 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: headerlayout
-  name: headerlayout
+    app: header-layout1
+  name: header-layout1
 spec:
   ports:
     - port: 9040
       protocol: TCP
       targetPort: 9040
   selector:
-    app: headerlayout
+    app: header-layout1
   type: ClusterIP
 status:
   loadBalancer: {}
 ---
 apiVersion: apps/v1
-kind: Dheader-layoutloyment
+kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: headerlayout
-  name: headerlayout
+    app: header-layout1
+  name: header-layout1
 spec:
-  rheader-layoutlicas: 1
+  replicas: 1
   selector:
     matchLabels:
-      app: headerlayout
+      app: header-layout1
   strategy:
     rollingUpdate:
       maxSurge: 50%
@@ -36,12 +36,12 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: headerlayout
+        app: header-layout1
     spec:
       containers:
         - image: 942314741364.dkr.ecr.us-east-1.amazonaws.com/m1-platform/headerlayout1:appImageTag
-          name: headerlayout
-          imagheader-layoutullPolicy: Always
+          name: header-layout1
+          imagePullPolicy: Always
           securityContext:
             capabilities:
               drop: ["ALL"]
@@ -68,23 +68,23 @@ spec:
             failureThreshold: 5
           volumeMounts:
             - mountPath: /tmp
-              name: header-layout-temp
+              name: hl1-temp
             - mountPath: /home/nonroot/logs
-              name: header-layout-logs 
+              name: hl1-logs 
             - mountPath: /tmp/logs
-              name: header-layout-temp-logs
+              name: hl1-temp-logs
             - mountPath: /tmp/nginx
-              name: header-layout-nginx
+              name: hl1-nginx
             - mountPath: /var/log/nginx/
-              name: header-layout-nginx-logs                   
+              name: hl1-nginx-logs                   
       volumes:
-        - name: header-layout-temp
+        - name: hl1-temp
           emptyDir: {}
-        - name: header-layout-logs
+        - name: hl1-logs
           emptyDir: {}
-        - name: header-layout-temp-logs
+        - name: hl1-temp-logs
           emptyDir: {}
-        - name: header-layout-nginx
+        - name: hl1-nginx
           emptyDir: {}
-        - name: header-layout-nginx-logs     
+        - name: hl1-nginx-logs     
           emptyDir: {}
