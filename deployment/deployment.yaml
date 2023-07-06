@@ -9,7 +9,7 @@ spec:
   ports:
     - port: 9040
       protocol: TCP
-      targetPort: 9040
+      targetPort: 8080
   selector:
     app: header-layout1
   type: NodePort
