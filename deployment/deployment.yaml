@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: header-layout1
+  name: header-layout1
+spec:
+  ports:
+    - port: 9040
+      protocol: TCP
+      targetPort: 9040
+  selector:
+    app: header-layout1
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: header-layout1
+  name: header-layout1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: header-layout1
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 10%
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: header-layout1
+    spec:
+      containers:
+        - image: 942314741364.dkr.ecr.us-east-1.amazonaws.com/m1-platform/headerlayout1:appImageTag
+          name: header-layout1
+          imagePullPolicy: Always
+          securityContext:
+            capabilities:
+              drop: ["ALL"]
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+          resources:
+            requests:
+              cpu: 200m
+              memory: 300Mi
+            limits:
+              cpu: 500m
+              memory: 800Mi
+          livenessProbe:
+            tcpSocket:
+              port: 9040
+            initialDelaySeconds: 100
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 9040
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 5
+          volumeMounts:
+            - mountPath: /tmp
+              name: hl1-temp
+            - mountPath: /home/nonroot/logs
+              name: hl1-logs 
+            - mountPath: /tmp/logs
+              name: hl1-temp-logs
+            - mountPath: /tmp/nginx
+              name: hl1-nginx
+            - mountPath: /var/log/nginx/
+              name: hl1-nginx-logs                   
+      volumes:
+        - name: hl1-temp
+          emptyDir: {}
+        - name: hl1-logs
+          emptyDir: {}
+        - name: hl1-temp-logs
+          emptyDir: {}
+        - name: hl1-nginx
+          emptyDir: {}
+        - name: hl1-nginx-logs     
+          emptyDir: {}
