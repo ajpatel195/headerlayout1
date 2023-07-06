@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Generating build for commit:$CODEBUILD_RESOLVED_SOURCE_VERSION and branch:$CODEBUILD_SOURCE_VERSION"
+  pre_build:
+    commands:
+      - echo "Login to AWS ECR..."
+      - $(aws ecr get-login --no-include-email --region $REGION)
+      - cd $CODEBUILD_SRC_DIR
+      - cp $CODEBUILD_SRC_DIR_devops_util/scripts/* $CODEBUILD_SRC_DIR
+  build:
+    commands:
+      - echo "Building Docker image $IMAGE_NAME on `date`"
+      - ./ci-utility.sh --build
+      - ./ci-utility.sh --lint
+      - ./ci-utility.sh --sast
+      - echo "Pushing Docker image $IMAGE_NAME to ECR"
+      - ./ci-utility.sh --push
+  post_build:
+    commands:
+      - ./ci-utility.sh --notify     
+artifacts:    
+  files:
+    - '$CODEBUILD_SRC_DIR/images.json'
