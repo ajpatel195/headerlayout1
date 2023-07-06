@@ -7,6 +7,7 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
+import { DefaultConfig } from './shared/constants';
 import { HeaderConfig } from './shared/models/headerConfig';
 
 @Component({
@@ -19,18 +20,6 @@ import { HeaderConfig } from './shared/models/headerConfig';
 export class AppComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() header_config: HeaderConfig;
-
-  configOptions: any;
-  defaultConfig = {
-    header: {
-      path: 'http://192.168.1.2:8081/output/m1-header.js',
-      options: {
-        image_url: 'http://192.168.1.2:8081/src/assets/motus-logo-gray-blue.svg',
-        height: 30,
-        width: 100
-      }
-    }
-  };
 
   constructor(
   ) {
@@ -47,8 +36,7 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
     if (typeof changes?.['header_config']?.currentValue === 'string') {
       this.header_config = JSON.parse(changes?.['header_config']?.currentValue);
     }
-    this.header_config = Object.assign(this.header_config, this.defaultConfig)
-    this.configOptions = this.header_config?.header?.options;
+    this.header_config = Object.assign(this.header_config, DefaultConfig)
   }
 
 }
