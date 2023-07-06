@@ -7,14 +7,10 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
 
   let initConfig = {
-    header: {
-      path: 'http://192.168.1.2:8081/output/m1-header.js',
-      options: {
-        image_url: 'http://192.168.1.2:8081/src/assets/motus-logo-gray-blue.svg',
-        height: 30,
-        width: 100
-      }
-    }
+    image_url: 'http://192.168.1.2:8081/src/assets/motus-logo-gray-blue.svg',
+    height: 30,
+    width: 100,
+    subtitle: 'Powered by MeasureOne'
   };
 
   beforeEach(async () => {
@@ -60,11 +56,11 @@ describe('AppComponent', () => {
         header_config: simpleChangesStub
       };
       component.ngOnChanges(changesObj);
-      expect(component.header_config).toEqual(initConfig);
-      expect(component.configOptions).toEqual({
-        image_url: 'http://192.168.1.2:8081/src/assets/motus-logo-gray-blue.svg',
+      expect(component.header_config).toEqual({
+        image_url: '',
         height: 30,
-        width: 100
+        width: 100,
+        subtitle: 'Powered by MeasureOne'
       });
     });
   });
