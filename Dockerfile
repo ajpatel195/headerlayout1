@@ -2,7 +2,7 @@
 # Create an alias image to build the project & executable.
 # The executable built will be non cross compilable exec - requires same arch
 # ----------------------------------------------------------------------------------
-FROM 942314741364.dkr.ecr.us-east-1.amazonaws.com/devops/node:14.16.1-alpine AS header-builder
+FROM node:16.13-alpine AS header-builder
 RUN addgroup -S appuser && adduser -S appuser -G appuser -u 1001 -h /home/appuser && \
     chown -R appuser:appuser /home/appuser 
 ARG build_env=dev
@@ -69,6 +69,5 @@ ARG version=dev
 LABEL release=$version
 
 COPY --from=header-builder /home/appuser/header/output/m1-header.js /usr/share/nginx/html/v3/js/m1-header-2021042000.js
-COPY --from=header-builder /home/appuser/header/images /usr/share/nginx/html/v3/images
 USER 1001
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
