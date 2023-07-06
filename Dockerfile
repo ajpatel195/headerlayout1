@@ -68,6 +68,6 @@ COPY --from=nginx-base /opt /
 ARG version=dev
 LABEL release=$version
 
-COPY --from=header-builder /home/appuser/header/output/m1-header.js /usr/share/nginx/html/v3/js/m1-header-2021042000.js
+COPY --from=header-builder /home/appuser/header/output/m1-header.js /usr/share/nginx/html/v3/js/m1-header/m1-header-2021042000.js
 USER 1001
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
