@@ -12,7 +12,7 @@ RUN apk update && apk add --no-cache curl && \
 
 # Build header for specified environment
 WORKDIR /home/appuser/header
-COPY --chown=appuser:appuser ["package.json", "./"]
+COPY --chown=appuser:appuser ["package*.json", "./"]
 RUN npm install
 COPY --chown=appuser:appuser . .
 # Arg to determine whether to run tests or skip unit tests
