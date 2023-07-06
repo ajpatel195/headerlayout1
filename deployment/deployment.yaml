@@ -55,17 +55,17 @@ spec:
             limits:
               cpu: 500m
               memory: 800Mi
-          livenessProbe:
-            tcpSocket:
-              port: 9040
-            initialDelaySeconds: 100
-            periodSeconds: 10
-          readinessProbe:
-            tcpSocket:
-              port: 9040
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            failureThreshold: 5
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 9040
+          #   initialDelaySeconds: 100
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 9040
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          #   failureThreshold: 5
           volumeMounts:
             - mountPath: /tmp
               name: hl1-temp
