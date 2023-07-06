@@ -1,6 +1,26 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: headerlayout-config
-data:
-
+kind: ConfigMap                                                                                   
+apiVersion: v1                                                                                    
+metadata:                                                                                         
+  name: headerlayout-config                                                                            
+data:                                                                                             
+  default.conf: |-   
+    map $http_user_agent $ignore_ua {
+    default                 1;
+    "ELB-HealthChecker/2.0" 0;
+    }                                                                             
+    server {                                                                                      
+      gzip on;                                                                                    
+      gzip_types *;                                                                               
+      listen 8080;                                                                                  
+      root /usr/share/nginx/html;                                                                 
+      location ~ \.(js) {      
+        add_header Cache-Control 'no-store, max-age=0';                                                                     
+        root /usr/share/nginx/html;                                                               
+      }                                                                                           
+      location ~ \.(css) {                       
+        add_header Cache-Control 'no-store, max-age=0';                                                 
+        root /usr/share/nginx/html;                                                               
+      }  
+      access_log /var/log/nginx/access.log combined if=$ignore_ua;                                                                                         
+    }                                                                                             
+---
