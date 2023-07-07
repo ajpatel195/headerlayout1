@@ -7,7 +7,7 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
 
   let initConfig = {
-    image_url: 'https://ik.imagekit.io/measureone/customer_logos/lgo_2SEkfwDgYrUEO3okKxzGtuZwbqO.svg?tr=w-100',
+    logo_url: 'https://ik.imagekit.io/measureone/customer_logos/lgo_2SEkfwDgYrUEO3okKxzGtuZwbqO.svg?tr=w-100',
     height: "100",
     width: "100",
     subtitle: 'Powered by MeasureOne'
@@ -57,7 +57,7 @@ describe('AppComponent', () => {
       };
       component.ngOnChanges(changesObj);
       expect(component.header_config).toEqual({
-        image_url: 'https://ik.imagekit.io/measureone/customer_logos/lgo_2SEkfwDgYrUEO3okKxzGtuZwbqO.svg?tr=w-100',
+        logo_url: 'https://ik.imagekit.io/measureone/customer_logos/lgo_2SEkfwDgYrUEO3okKxzGtuZwbqO.svg?tr=w-100',
         height: "100",
         width: "100",
         subtitle: 'Powered by MeasureOne'
