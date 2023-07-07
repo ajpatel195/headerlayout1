@@ -6,4 +6,5 @@ export class HeaderConfig {
         height?: any;
         width?: any;
         subtitle?: string;
+        branding?: object;
 }
