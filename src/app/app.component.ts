@@ -7,7 +7,6 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import { DefaultConfig } from './shared/constants';
 import { HeaderConfig } from './shared/models/headerConfig';
 
 @Component({
