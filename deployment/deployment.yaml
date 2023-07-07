@@ -55,12 +55,12 @@ spec:
               memory: 800Mi
           livenessProbe:
             tcpSocket:
-              port: 9040
+              port: 8080
             initialDelaySeconds: 100
             periodSeconds: 10
           readinessProbe:
             tcpSocket:
-              port: 9040
+              port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
             failureThreshold: 5
