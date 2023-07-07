@@ -36,7 +36,6 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
     if (typeof changes?.['header_config']?.currentValue === 'string') {
       this.header_config = JSON.parse(changes?.['header_config']?.currentValue);
     }
-    this.header_config = Object.assign(this.header_config, DefaultConfig)
   }
 
 }

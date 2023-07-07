@@ -7,9 +7,9 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
 
   let initConfig = {
-    image_url: 'http://192.168.1.2:8081/src/assets/motus-logo-gray-blue.svg',
-    height: 30,
-    width: 100,
+    image_url: 'https://ik.imagekit.io/measureone/customer_logos/lgo_2SEkfwDgYrUEO3okKxzGtuZwbqO.svg?tr=w-100',
+    height: "100",
+    width: "100",
     subtitle: 'Powered by MeasureOne'
   };
 
@@ -40,7 +40,7 @@ describe('AppComponent', () => {
 
   describe('ngOnChanges', () => {
 
-    it('should set current value in header_config', () => {
+    it('should set current value in header_config if type is string', () => {
       const simpleChangesStub: SimpleChange = new SimpleChange(null, JSON.stringify(initConfig), true);
       const changesObj: SimpleChanges = {
         header_config: simpleChangesStub
@@ -49,7 +49,7 @@ describe('AppComponent', () => {
       expect(component.header_config).toEqual(initConfig);
     });
 
-    it('should set header_config and configOptions directly', () => {
+    it('should set header_config directly is type is not string', () => {
       component.header_config = initConfig;
       const simpleChangesStub: SimpleChange = new SimpleChange(null, null, true);
       const changesObj: SimpleChanges = {
@@ -57,9 +57,9 @@ describe('AppComponent', () => {
       };
       component.ngOnChanges(changesObj);
       expect(component.header_config).toEqual({
-        image_url: '',
-        height: 30,
-        width: 100,
+        image_url: 'https://ik.imagekit.io/measureone/customer_logos/lgo_2SEkfwDgYrUEO3okKxzGtuZwbqO.svg?tr=w-100',
+        height: "100",
+        width: "100",
         subtitle: 'Powered by MeasureOne'
       });
     });
