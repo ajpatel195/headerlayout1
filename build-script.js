@@ -11,8 +11,8 @@ const glob = require('util').promisify(require('glob'));
 
   const stylesCSS = fs.readFileSync('dist/header-layout1/styles.css'); // reads css file
   const stylesJS = fs.openSync('dist/header-layout1/styles.js', 'w+'); // writes into js file
-  const prependScript = Buffer.from(`const styleElement = document.createElement('style');styleElement.appendChild(document.createTextNode(\``);
-  const appendScript = Buffer.from(`\`));document.getElementsByTagName('head')[0].appendChild(styleElement);`)
+  const prependScript = Buffer.from(`const headerStyleElement = document.createElement('style');headerStyleElement.appendChild(document.createTextNode(\``);
+  const appendScript = Buffer.from(`\`));document.getElementsByTagName('head')[0].appendChild(headerStyleElement);`)
   const length = prependScript.length+stylesCSS.length+appendScript.length;
   fs.write(stylesJS, `${prependScript}${stylesCSS}${appendScript}`, 0, length, 0); // adds file content
   fs.close(stylesJS);  
