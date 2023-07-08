@@ -9,12 +9,10 @@ spec:
   ports:
     - port: 9040
       protocol: TCP
-      targetPort: 9040
+      targetPort: 8080
   selector:
     app: header-layout1
-  type: ClusterIP
-status:
-  loadBalancer: {}
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -57,12 +55,12 @@ spec:
               memory: 800Mi
           livenessProbe:
             tcpSocket:
-              port: 9040
+              port: 8080
             initialDelaySeconds: 100
             periodSeconds: 10
           readinessProbe:
             tcpSocket:
-              port: 9040
+              port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
             failureThreshold: 5
