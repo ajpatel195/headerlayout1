@@ -5,7 +5,6 @@ import { BrowserModule,ɵDomSharedStylesHost } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { createCustomElement } from '@angular/elements';
-import { AvatarModule } from 'ngx-avatars';
 import { HttpClientModule } from '@angular/common/http';
 // import * from './../assets/m1-hea'
 @NgModule({
@@ -15,7 +14,6 @@ import { HttpClientModule } from '@angular/common/http';
     imports: [
       BrowserModule,
     HttpClientModule,
-    AvatarModule
     ],
     providers: [
         
