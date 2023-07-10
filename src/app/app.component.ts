@@ -2,21 +2,17 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
   Input,
   OnChanges,
   OnInit,
-  Output,
   SimpleChanges,
-  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
+import { DefaultBranding, DefaultConfig } from './shared/constants';
 import { HeaderConfig } from './shared/models/headerConfig';
-// import * as lodash from 'lodash';
-
 
 @Component({
-  selector: 'm1-link',
+  selector: 'm1-header',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom,
@@ -25,20 +21,9 @@ import { HeaderConfig } from './shared/models/headerConfig';
 export class AppComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() header_config: HeaderConfig;
+  branding: any;
 
-   defaultAvatarConfig = {
-    size: 40,
-    initialsSize: 2,
-    src: 'https://cdn2.hubspot.net/hubfs/6171800/assets/images/logos/m-logo-symbol@2x.png',
-    cornerRadius: 5,
-    bgColor: 'black',
-    name: '3rd Degree Screening',
-    round: false
-  }
-
-  currentHeight: any;
-  constructor(
-  ) {
+  constructor(private host: ElementRef<HTMLElement>) {
   }
 
   ngOnInit(): void {
@@ -48,13 +33,22 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("control in ng changes",changes);
-    
+
     if (typeof changes?.['header_config']?.currentValue === 'string') {
       this.header_config = JSON.parse(changes?.['header_config']?.currentValue);
     }
-    this.header_config = Object.assign(this.header_config,this.defaultAvatarConfig)
-    console.log(this.header_config);
+    this.header_config = Object.assign(DefaultConfig, this.header_config);
+
+    this.branding = Object.assign(DefaultBranding, this.header_config?.branding);
+    Object.entries(this.branding).forEach(([key, value]) => {
+      this.updateBranding(key, value);
+    });
+
+  }
+
+  private updateBranding(name: any, value: any): void {
+    this.host.nativeElement.style.setProperty(`--${name}`, value);
+
   }
 
 }
