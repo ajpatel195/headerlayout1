@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Branding } from './branding';
 
 @Injectable()
 export class HeaderConfig {
@@ -6,5 +7,5 @@ export class HeaderConfig {
         height?: any;
         width?: any;
         subtitle?: string;
-        branding?: object;
+        branding?: Branding;
 }

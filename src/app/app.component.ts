@@ -39,13 +39,14 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
     }
     this.header_config = Object.assign(DefaultConfig, this.header_config);
 
-    this.branding = this.header_config?.branding || DefaultBranding;
-    this.updateBranding('subtitle_color', this.branding?.subtitle_color);
-    this.updateBranding('font_family', this.branding?.font_family);
-    this.updateBranding('font_size', this.branding?.font_size);
+    this.branding = Object.assign(DefaultBranding, this.header_config?.branding);
+    Object.entries(this.branding).forEach(([key, value]) => {
+      this.updateBranding(key, value);
+    });
+
   }
 
-  private updateBranding(name: any, value: string): void {
+  private updateBranding(name: any, value: any): void {
     this.host.nativeElement.style.setProperty(`--${name}`, value);
 
   }

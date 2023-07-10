@@ -9,6 +9,6 @@ export const DefaultConfig: HeaderConfig = {
 
 export const DefaultBranding = {
     font_family: 'Open Sans,sans-serif',
-    font_size: '16px',
+    font_size: '12px',
     subtitle_color: '#141414',
 };
