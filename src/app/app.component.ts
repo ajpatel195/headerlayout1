@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import { DefaultBranding, DefaultConfig } from './shared/constants';
+import { Branding } from './shared/models/branding';
 import { HeaderConfig } from './shared/models/headerConfig';
 
 @Component({
@@ -21,7 +21,6 @@ import { HeaderConfig } from './shared/models/headerConfig';
 export class AppComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() header_config: HeaderConfig;
-  branding: any;
 
   constructor(private host: ElementRef<HTMLElement>) {
   }
@@ -37,10 +36,8 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
     if (typeof changes?.['header_config']?.currentValue === 'string') {
       this.header_config = JSON.parse(changes?.['header_config']?.currentValue);
     }
-    this.header_config = Object.assign(DefaultConfig, this.header_config);
 
-    this.branding = Object.assign(DefaultBranding, this.header_config?.branding);
-    Object.entries(this.branding).forEach(([key, value]) => {
+    Object.entries(this.header_config?.branding as Branding).forEach(([key, value]) => {
       this.updateBranding(key, value);
     });
 

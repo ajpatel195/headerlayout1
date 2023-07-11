@@ -10,7 +10,12 @@ describe('AppComponent', () => {
     logo_url: 'https://ik.imagekit.io/measureone/customer_logos/lgo_2SEkfwDgYrUEO3okKxzGtuZwbqO.svg?tr=w-100',
     height: "100",
     width: "100",
-    subtitle: 'Powered by MeasureOne'
+    subtitle: 'Powered by MeasureOne',
+    branding: {
+      font_family: 'Open Sans,sans-serif',
+      font_size: '12px',
+      subtitle_color: '#141414',
+    }
   };
 
   beforeEach(async () => {
@@ -53,7 +58,7 @@ describe('AppComponent', () => {
 
       expect(component.header_config).toEqual(initConfig);
       expect(component['updateBranding']).toHaveBeenCalledTimes(3);
-      expect(component.branding).toEqual({ font_family: 'Open Sans,sans-serif', font_size: '16px', subtitle_color: '#141414' });
+      expect(component.header_config.branding).toEqual({ font_family: 'Open Sans,sans-serif', font_size: '12px', subtitle_color: '#141414' });
     });
 
     it('should set header_config directly is type is not string', () => {
@@ -74,23 +79,25 @@ describe('AppComponent', () => {
         logo_url: 'https://ik.imagekit.io/measureone/customer_logos/lgo_2SEkfwDgYrUEO3okKxzGtuZwbqO.svg?tr=w-100',
         height: "100",
         width: "100",
-        subtitle: 'Powered by MeasureOne'
+        subtitle: 'Powered by MeasureOne',
+        branding: {
+          font_family: 'Open Sans,sans-serif',
+          font_size: '12px',
+          subtitle_color: '#141414',
+        }
       });
 
       expect(component['updateBranding']).toHaveBeenCalledTimes(3);
-      expect(component.branding).toEqual({ font_family: 'Open Sans,sans-serif', font_size: '16px', subtitle_color: '#141414' });
+      expect(component.header_config.branding).toEqual({ font_family: 'Open Sans,sans-serif', font_size: '12px', subtitle_color: '#141414' });
     });
 
     it('should updateBranding', () => {
 
-      component.branding = {
-        font_family: 'arial',
-        font_size: '20px',
-        subtitle_color: '#716321',
-      };
+      component.header_config = initConfig;
+
       spyOn<any>(component['host'].nativeElement.style, 'setProperty');
 
-      component['updateBranding']('subtitle_color', component.branding.subtitle_color);
+      component['updateBranding']('subtitle_color', '#716321');
       expect(component['host'].nativeElement.style.setProperty).toHaveBeenCalledWith(`--${'subtitle_color'}`, '#716321');
     });
   });
