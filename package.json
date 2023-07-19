@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --code-coverage=true",
     "build:dev": "ng build --configuration=dev --output-hashing none --extra-webpack-config webpack.extra.js && node build-script.js"
   },
   "private": true,
