@@ -18,7 +18,7 @@
           "builder": "ngx-build-plus:browser",
           "options": {
             "sourceMap":true,
-"optimization":false,
+            "optimization":false,
             "outputPath": "dist/header-layout1",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -90,6 +90,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "karmaConfig": "karma.conf.js",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
