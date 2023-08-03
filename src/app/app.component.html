@@ -1,18 +1,11 @@
-
 <div class="d-flex flex-column align-items-center justify-content-center">
 
-   <img #k_image src="assets/blank_image.svg" width={{header_config?.width}} height={{header_config?.height}}
-    />
-<!--
-  <img src={{header_config?.logo_url}} width={{header_config?.width}} height={{header_config?.height}}
-    onload="javascript:document.getElementById('k_image').remove(); " /> -->
+  <div #k_image [style]="styles"></div>
 
-
-<img src={{header_config?.logo_url}} width={{header_config?.width}} height={{header_config?.height}}
-(load)="dosomething()" />
+  <img #origImage style="display: none;" src={{header_config?.logo_url}} width={{header_config?.width}}
+    height={{header_config?.height}} (load)="dosomething()" />
 
   <div class="d-flex flex-column">
     <p class="m-2 header-text">{{header_config?.subtitle}}</p>
   </div>
 </div>
-
