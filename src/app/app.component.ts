@@ -6,6 +6,7 @@ import {
   OnChanges,
   OnInit,
   SimpleChanges,
+  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import { Branding } from './shared/models/branding';
@@ -21,6 +22,7 @@ import { HeaderConfig } from './shared/models/headerConfig';
 export class AppComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() header_config: HeaderConfig;
+  @ViewChild('k_image') kImg:ElementRef;
 
   constructor(private host: ElementRef<HTMLElement>) {
   }
@@ -41,6 +43,11 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
       this.updateBranding(key, value);
     });
 
+  }
+
+  dosomething(){
+    console.log("test test ");
+    this.kImg.nativeElement.remove();
   }
 
   private updateBranding(name: any, value: any): void {
