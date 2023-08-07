@@ -1,9 +1,9 @@
 <div class="d-flex flex-column align-items-center justify-content-center">
 
-  <div #k_image [style]="styles"></div>
+  <div #temp_image [style]="styles"></div>
 
-  <img #origImage style="display: none;" src={{header_config?.logo_url}} width={{header_config?.width}}
-    height={{header_config?.height}} (load)="dosomething()" />
+  <img #original_image style="display: none;" src={{header_config?.logo_url}} width={{header_config?.width}}
+    height={{header_config?.height}} (load)="loadMainImage()" />
 
   <div class="d-flex flex-column">
     <p class="m-2 header-text">{{header_config?.subtitle}}</p>

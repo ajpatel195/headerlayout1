@@ -22,8 +22,8 @@ import { HeaderConfig } from './shared/models/headerConfig';
 export class AppComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() header_config: HeaderConfig;
-  @ViewChild('k_image') kImg: ElementRef;
-  @ViewChild('origImage') oImage: ElementRef;
+  @ViewChild('temp_image') tempImage: ElementRef;
+  @ViewChild('original_image') originalImage: ElementRef;
   public styles: any;
   constructor(private host: ElementRef<HTMLElement>) {
   }
@@ -45,27 +45,14 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
     });
 
     this.styles = `height:${this.header_config.height}px; width:${this.header_config.width}px`;
-    console.log(this.styles);
 
   }
 
-  dosomething() {
-    console.log("test test ");
-    this.kImg.nativeElement.hidden = true;
-    this.oImage.nativeElement.style = { display: 'block' };
-
-    // this.kImg.nativeElement.remove();
+  loadMainImage() {
+    this.tempImage.nativeElement.hidden = true;
+    this.originalImage.nativeElement.style = { display: 'block' };
   }
-
-  isKImageHidden() {
-    return this.kImg.nativeElement ? true : false;
-  }
-
-  loadstartimg() {
-    console.log("loadstart")
-    this.oImage.nativeElement.visible = false;
-  }
-
+  
   private updateBranding(name: any, value: any): void {
     this.host.nativeElement.style.setProperty(`--${name}`, value);
 
