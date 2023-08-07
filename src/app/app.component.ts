@@ -6,6 +6,7 @@ import {
   OnChanges,
   OnInit,
   SimpleChanges,
+  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import { Branding } from './shared/models/branding';
@@ -21,7 +22,9 @@ import { HeaderConfig } from './shared/models/headerConfig';
 export class AppComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() header_config: HeaderConfig;
-
+  @ViewChild('temp_image') tempImage: ElementRef;
+  @ViewChild('original_image') originalImage: ElementRef;
+  public styles: any;
   constructor(private host: ElementRef<HTMLElement>) {
   }
 
@@ -41,8 +44,15 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
       this.updateBranding(key, value);
     });
 
+    this.styles = `height:${this.header_config.height}px; width:${this.header_config.width}px`;
+
   }
 
+  loadMainImage() {
+    this.tempImage.nativeElement.hidden = true;
+    this.originalImage.nativeElement.style = { display: 'block' };
+  }
+  
   private updateBranding(name: any, value: any): void {
     this.host.nativeElement.style.setProperty(`--${name}`, value);
 
