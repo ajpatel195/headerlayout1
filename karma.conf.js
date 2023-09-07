@@ -33,7 +33,7 @@ module.exports = function (config) {
         ],
         check: {
           global: {
-            lines: 70,
+            lines: 90,
           },
         },
       },
