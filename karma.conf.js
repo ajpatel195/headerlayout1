@@ -25,7 +25,6 @@ module.exports = function (config) {
           { type: 'html' },
           { type: 'text-summary' }
         ],
-        fixWebpackSourcePaths: true,
         check: {
           global: {
             lines: 90,
