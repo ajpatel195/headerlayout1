@@ -22,6 +22,8 @@ ARG IGNORE_FAILURE=false
 ARG RUN_SAST=false
 ARG SNYK_TOKEN
 ARG SAST_TYPE=iac
+RUN apk add --no-cache  chromium --repository=http://dl-cdn.alpinelinux.org/alpine/v3.10/main
+ENV CHROME_BIN=/usr/bin/chromium-browser
 RUN ./build-app.sh $RUN_UNIT_TESTS $IGNORE_FAILURE $RUN_SAST $SNYK_TOKEN $SAST_TYPE
 RUN npm run build:${build_env}
 

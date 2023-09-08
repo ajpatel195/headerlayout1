@@ -10,8 +10,8 @@ SAST_TYPE=$5
 
 TEST_COMMAND="npm test"
 
-if [[ "$RUN_TESTS" == "true" ]] ; then
-    if [[ $CONTINUE_BUILD == "true" ]]; then
+if [[ "$RUN_UNIT_TESTS" == "true" ]] ; then
+    if [[ $IGNORE_FAILURE == "true" ]]; then
         echo "Executing build command with tests (ignoreFailure=true)"
         $TEST_COMMAND || true
     else
