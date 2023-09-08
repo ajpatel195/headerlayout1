@@ -1,6 +1,6 @@
 #! /bin/ash
 # The script intends to create the command based on input configurable parameters, whether to run/skip test
-# Whether to run tests and continue build without failing the build
+# Whether to run tests and IGNORE_FAILURE without failing the build
 
 RUN_UNIT_TESTS=$1
 IGNORE_FAILURE=$2
