@@ -1,0 +1,10 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.0
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-CC-K8S-11:
+    - '*':
+        reason: User above 10,000 is not available inside the docker image.
+        expires: 2024-10-08T12:06:49.336Z
+        created: 2023-09-08T12:06:49.340Z
+patch: {}
