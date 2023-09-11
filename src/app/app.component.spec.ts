@@ -100,6 +100,18 @@ describe('AppComponent', () => {
       component['updateBranding']('subtitle_color', '#716321');
       expect(component['host'].nativeElement.style.setProperty).toHaveBeenCalledWith(`--${'subtitle_color'}`, '#716321');
     });
+
+    it('should set display: block style for originalImage ElementRef', () => {
+
+      const originalImageMock = { nativeElement: { style: {display: 'none'} } };
+      component.originalImage = originalImageMock;
+
+      component.loadMainImage();
+      fixture.detectChanges() 
+      expect(originalImageMock.nativeElement.style.display).toBe('block');
+      expect(component['tempImage'].nativeElement.hidden).toBeTrue();
+    });
+
   });
 
 });
