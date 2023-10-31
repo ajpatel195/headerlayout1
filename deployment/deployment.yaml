@@ -35,6 +35,8 @@ spec:
       creationTimestamp: null
       labels:
         app: header-layout1
+      annotations:
+        "cluster-autoscaler.kubernetes.io/safe-to-evict": "true"
     spec:
       containers:
         - image: 942314741364.dkr.ecr.us-east-1.amazonaws.com/m1-platform/headerlayout1:appImageTag
